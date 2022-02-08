@@ -15,11 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
-from student_details import views
-# from vaccine_drive import views
+from student_details import views as student_views
+from vaccine_drive import views as vaccine_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('students/', views.student_list),
-    # path('vaccineDrive/', include('vaccine_drive.urls')),
+    path('students/', student_views.student_list),
+    path('addStudent/', student_views.student_add),
+    path('deleteStudent/<int:pk>/', student_views.student_delete),
+    path('vaccineDrive/',vaccine_views.vaccine_list),
+    path('updateDrive/<int:pk>/',vaccine_views.vaccine_update)
+    
 ]
