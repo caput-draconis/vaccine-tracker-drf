@@ -14,12 +14,18 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path,include
-from student_details import views
-# from vaccine_drive import views
+from django.urls import path
+from student_details import views as student_views
+from vaccine_drive import views as vaccine_views
+from . import views as schema_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('students/', views.student_list),
-    # path('vaccineDrive/', include('vaccine_drive.urls')),
+    path('students/', student_views.student_list),
+    path('addStudent/', student_views.student_add),
+    path('deleteStudent/<int:pk>/', student_views.student_delete),
+    path('vaccineDrive/',vaccine_views.vaccine_list),
+    path('updateDrive/<int:pk>/',vaccine_views.vaccine_update),
+    path('bulkAdd/',student_views.BulkAdd.as_view(), name='student-add'),
+    path('swagger/',schema_views.schema_view)
 ]
